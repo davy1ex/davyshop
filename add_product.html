@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/static/js/vendors/jquery.js"></script>
+</head>
+<body>
+    <form action="/server/upload.php" method="post" enctype="multipart/form-data">
+        <label for="title">Title</label>
+        <input id="inp_title" type="text" name="title">
+    
+        <label for="description">Description</label>
+        <input id="inp_desc" type="text" name="description">
+    
+        <label for="price">Price</label>
+        <input type="number" name="price">
+    
+        <select name="currency" id="">
+            <option value="dlr">$</option>
+            <option value="rub">₽</option>
+        </select>
+
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" id="btnAddProduct" value="Add Product" name="submit">
+    </form>
+</body>
+
+<script>
+    $("#btnAddProduct").on('click', function() {
+        console.log($("#inp_title").val())
+    })
+</script>
+
+</html>
