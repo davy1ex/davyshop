@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>davyshop</title>
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="static/css/base.css">
+    <link rel="stylesheet" href="/static/css/product/products.css">
+
+    <script src="/static/js/vendors/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <script src="/static/js/methods.js"></script>
+</head>
+<body>
+    <header>
+        <div class="wrapper">
+            <div class="mainmenu">
+                <ul>                
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/products.php">Products</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Add Products</a></li>
+                    <li><a href="#">Shoping cart</a></li>
+                </ul>
+            </div>
+            
+            
+            <div class="usermenu">
+                <ul>
+                    <!-- {% if user %} -->
+                        <!-- <li><strong>{{ user }}</strong></li>
+                        <li><a href="">Setting</a></li>
+                        <li><a href="{% url 'logout' %}">LogOut</a></li> -->
+                    <!-- {% else %} -->
+                        <li><a href="">LogIn</a></li>
+                        <li>
+                            <div class="vk-logo">
+                                <a href="#">
+                                    <img src="static/images/vk-logo.png" alt="">
+                                </a>
+                            </div>
+                        </li>
+                </ul>
+            </div>
+                
+            
+        </div>
+    </header>
+    
+<div class="hello-text">
+    Choose your product
+</div>
+
+<div class="items_cell" id="items_cell"> </div>
+    <!-- {% for product in product_list %} -->
+
+    <!-- Кнопка, открывающая модальное окно -->
+    <a href="#" class="btn btn-primary">Открыть модальное окно</a>
+
+    <!-- HTML-код модального окна-->
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- Заголовок модального окна -->
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Заголовок модального окна</h4>
+              </div>
+              <!-- Основное содержимое модального окна -->
+              <div class="modal-body">
+                Содержимое модального окна...
+              </div>
+              <!-- Футер модального окна -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary">Сохранить изменения</button>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <!-- Скрипт, привязывающий событие click, открывающее модальное окно, к элементам, имеющим класс .btn -->
+    <script>
+    $(document).ready(function(){
+    //при нажатию на любую кнопку, имеющую класс .btn
+    $(".btn").click(function() {
+        //открыть модальное окно с id="myModal"
+        $("#myModal").modal('show');
+    });
+    });
+    </script>
+
+    <script>
+        $.each(get_product()['product'], function(i, item) {
+            $('#items_cell').append(
+                '<div class="item">\
+                    <div class="photo">\
+                        <img src="media/product/' + item.photo + '" alt="">\
+                    </div>\
+\
+                    <div class="item_info">\
+                        <div class="text">\
+                            <div class="title">' + 
+                                item.title +
+                        '</div>\
+\
+                    <div class="description">' +
+                        item.description +
+                    '</div>\
+\
+                    <div class="price-container">\
+                        <div style="color:black" class="price">' +
+                            item.price + ' ' + item.currency +
+                            // {% if product.currence != "" and product.price != "" %}
+                            //     <div class="currency">
+                            //         {% if product.currency == "USD" %}
+                            //             <img src="{% static 'images/usd.png' %}" alt="">
+                            //         {% endif %}
+                            //     </div>
+                            //     <div class="text">
+                            //         {{ product.currency }} {{ product.price }}
+                            //     </div>
+                                
+                            // {% else %}
+                            //     None
+                            // {% endif %}
+                            
+                        '</div>\
+                    </div>\
+                </div>\
+        \
+            </div>\
+            <div class="buy_container">\
+                <div class="buy_field">\
+                    <a href="/shoping_cart/add_'+ item.id + '"><img src="static/images/shopping_cart.png" alt=""></a>\
+                </div>\
+            </div>'
+            )
+        })
+        $('#openModal').on('shown.bs.modal', function () {
+            $('#exampleModal').trigger('focus')
+        })
+    </script>
+
